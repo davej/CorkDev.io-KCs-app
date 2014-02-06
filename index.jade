@@ -1,0 +1,34 @@
+doctype html
+html(lang="en", ng-app="")
+  head
+    title Order food
+    link(rel="stylesheet", href="styles/main.css")
+    script(src="bower_components/angular/angular.js")
+    script(src="scripts/kcs-controller.js")
+  body
+
+    div(ng-controller="OrderFoodCtrl", id="container")
+      h1 What food would you like?
+
+      #step-1(ng-class="{hide: order.food}")
+
+        input(ng-model="foodFilter", type="search", placeholder="Filter menu")
+
+        .menu
+          ul
+            li(ng-repeat="food in menu | filter:foodFilter | orderBy:'price':reverse ", ng-click="order.food = food")
+              | <strong>{{food.name}}</strong> ({{food.type}}): {{food.price | currency:'€' }}
+              button(class="order") Order Food
+
+        a(ng-click="reverse=!reverse") Sort by {{ reverse && 'least' || 'most' }} expensive
+
+      #step-2(ng-class="{show: order.food}")
+        input(type="text", ng-model="order.name", placeholder="Your name")
+        h2.
+          {{ order.name || 'Sally' }} ordered a {{ order.food.name }}
+          ({{ order.food.type}}) for {{order.food.price | currency:'€' }}
+
+        a(ng-click="order.food=null") Cancel Order
+
+        h4(style="margin-top:10em") Order JSON:
+        div {{ order | json }}

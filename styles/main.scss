@@ -1,0 +1,113 @@
+@import 'bourbon/bourbon';
+
+$h-font: 'Signika', sans-serif;
+$font: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+$primary-color: #777;
+$menu-color: rgba(255,255,255,0.4);
+
+* { @include box-sizing(border-box); }
+
+body {
+  font-size: 1.2em;
+  font-family: $font;
+  @include background-image(linear-gradient(-45deg, tint($primary-color, 20%), tint($primary-color, 60%)));
+  margin: 0;
+}
+
+#container {
+  margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+  height: 650px;
+  overflow: hidden;
+
+  width: 90%;
+  max-width: 500px;
+  background: rgba(255,255,255,0.4);
+  border-right: 2px rgba(255,255,255,0.7) solid;
+  border-left: 2px rgba(255,255,255,0.7) solid;
+  padding: 1em;
+
+  h1, h2, h3 {
+    font-family: $h-font;
+    text-shadow: 1px 1px 0px #fff;
+    text-align: center
+  }
+
+  #{$all-text-inputs} {
+    font-size: 1.05em;
+    width: 100%;
+    height: 1.5em;
+    line-height: 1.5em;
+    padding: 0.8em 0.3em;
+
+    &[type='search'] {
+      @include appearance(none);
+      border-radius: 0.7em;
+    }
+
+    &:focus { outline: none; }
+  }
+}
+
+#step-1, #step-2 {
+  position: absolute;
+  width: calc(100% - 2em);
+  @include transition (all 0.2s ease-in-out);
+
+  &.hide, &.show {
+    @include transform(translateX(-600px));
+  }
+
+  > a {
+    display: inline-block;
+    margin-top: 1em;
+    border-bottom: 1px #888 dotted;
+    cursor: pointer;
+    font-size: 0.8em;
+  }
+}
+
+#step-2 { margin-left: 600px; }
+
+.menu {
+  $triangle-size: 30px;
+
+  background: $menu-color;
+  box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.15);
+  margin-top: $triangle-size;
+
+
+  &::before {
+    @include triangle($triangle-size, $menu-color, up);
+    content: '';
+    position: absolute;
+    margin-top: 0 - $triangle-size;
+    margin-left: 5%;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    padding: 0.3em 0;
+    cursor: pointer;
+  }
+
+  li {
+    padding: 1em 0;
+    border-bottom: 1px #fff dotted;
+    padding: 1em;
+
+    &:hover {
+      background: rgba(255,255,255,0.6);
+    }
+  }
+
+  .order {
+    @include button(simple, $primary-color);
+    position: absolute;
+    right: 1em;
+    margin-top: -0.2em;
+  }
+}

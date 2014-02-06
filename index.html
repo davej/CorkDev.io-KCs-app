@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+  <head>
+    <title>Order food</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="scripts/kcs-controller.js"></script>
+  </head>
+  <body>
+    <div ng-controller="OrderFoodCtrl" id="container">
+      <h1>What food would you like?</h1>
+      <div id="step-1" ng-class="{hide: order.food}">
+        <input ng-model="foodFilter" type="search" placeholder="Filter menu">
+        <div class="menu">
+          <ul>
+            <li ng-repeat="food in menu | filter:foodFilter | orderBy:'price':reverse " ng-click="order.food = food"><strong>{{food.name}}</strong> ({{food.type}}): {{food.price | currency:'€' }}
+              <button class="order">Order Food</button>
+            </li>
+          </ul>
+        </div><a ng-click="reverse=!reverse">Sort by {{ reverse && 'least' || 'most' }} expensive</a>
+      </div>
+      <div id="step-2" ng-class="{show: order.food}">
+        <input type="text" ng-model="order.name" placeholder="Your name">
+        <h2>
+          {{ order.name || 'Sally' }} ordered a {{ order.food.name }}
+          ({{ order.food.type}}) for {{order.food.price | currency:'€' }}
+          
+        </h2><a ng-click="order.food=null">Cancel Order</a>
+        <h4 style="margin-top:10em">Order JSON:</h4>
+        <div>{{ order | json }}</div>
+      </div>
+    </div>
+  </body>
+</html>
