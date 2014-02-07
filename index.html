@@ -23,7 +23,7 @@
         <input type="text" ng-model="order.name" placeholder="Your name">
         <h2>
           {{ order.name || 'Sally' }} ordered a {{ order.food.name }}
-          ({{ order.food.type}}) for {{order.food.price | currency:'€' }}
+          ({{ order.food.type}}) for {{order.food.price | currency:'&euro;' }}
           
         </h2><a ng-click="order.food=null">Cancel Order</a>
         <h4 style="margin-top:10em">Order JSON:</h4>
