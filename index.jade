@@ -17,7 +17,7 @@ html(lang="en", ng-app="")
         .menu
           ul
             li(ng-repeat="food in menu | filter:foodFilter | orderBy:'price':reverse ", ng-click="order.food = food")
-              | <strong>{{food.name}}</strong> ({{food.type}}): {{food.price | currency:'€' }}
+              | <strong>{{food.name}}</strong> ({{food.type}}): {{food.price | currency:'&euro;' }}
               button(class="order") Order Food
 
         a(ng-click="reverse=!reverse") Sort by {{ reverse && 'least' || 'most' }} expensive

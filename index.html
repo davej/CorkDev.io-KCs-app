@@ -13,7 +13,7 @@
         <input ng-model="foodFilter" type="search" placeholder="Filter menu">
         <div class="menu">
           <ul>
-            <li ng-repeat="food in menu | filter:foodFilter | orderBy:'price':reverse " ng-click="order.food = food"><strong>{{food.name}}</strong> ({{food.type}}): {{food.price | currency:'€' }}
+            <li ng-repeat="food in menu | filter:foodFilter | orderBy:'price':reverse " ng-click="order.food = food"><strong>{{food.name}}</strong> ({{food.type}}): {{food.price | currency:'&euro;' }}
               <button class="order">Order Food</button>
             </li>
           </ul>
